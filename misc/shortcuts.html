@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shortcuts — Pedro Ribeiro de Almeida</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Rozha+One&display=swap&family=JetBrains+Mono:wght@400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #fc4f76;
+            --secondary-color: #076b91;
+            --tertiary-color: #f2ebf2;
+            --quaternary-color: #333333;
+            --accent-color: #313131;
+            --surface: #ffffff;
+            --surface-alt: #f8f4f8;
+            --border: #e0d8e0;
+
+            --font-header: "Rozha One", serif;
+            --font-body: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+        }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            font-family: var(--font-body);
+            line-height: 1.6;
+            color: var(--quaternary-color);
+            background-color: var(--tertiary-color);
+            padding-top: 60px;
+        }
+
+        /* Nav */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--secondary-color);
+            z-index: 1000;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: var(--tertiary-color);
+            text-decoration: none;
+            padding: 15px 0;
+            display: block;
+            font-family: var(--font-body);
+        }
+
+        nav ul li a.current,
+        nav ul li a:hover {
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        /* Dropdown */
+        nav ul li {
+            position: relative;
+        }
+
+        nav ul li .dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--secondary-color);
+            min-width: 140px;
+            border-top: 2px solid var(--primary-color);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            border-radius: 0 0 6px 6px;
+            overflow: hidden;
+        }
+
+        nav ul li:hover .dropdown {
+            display: block;
+        }
+
+        nav ul li .dropdown a {
+            padding: 10px 16px;
+            display: block;
+            font-size: 0.88rem;
+            border-bottom: none;
+            white-space: nowrap;
+        }
+
+        nav ul li .dropdown a:hover {
+            background-color: rgba(255,255,255,0.1);
+            border-bottom: none;
+        }
+
+        nav ul li .dropdown a.current {
+            color: var(--primary-color);
+            border-bottom: none;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--primary-color);
+            color: var(--tertiary-color);
+            padding: 28px 20px 22px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-family: var(--font-header);
+            font-size: 2rem;
+            font-weight: 400;
+            letter-spacing: 0.01em;
+        }
+
+        header .subheader {
+            margin-top: 4px;
+            font-size: 0.85rem;
+            opacity: 0.7;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            font-family: var(--font-mono);
+        }
+
+        /* Main */
+        main {
+            flex: 1;
+            max-width: 860px;
+            width: 100%;
+            margin: 36px auto;
+            padding: 0 24px;
+        }
+
+        /* Section block */
+        .shortcut-section {
+            background: var(--surface);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            margin-bottom: 36px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .shortcut-section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 24px;
+            background: var(--secondary-color);
+            color: var(--tertiary-color);
+        }
+
+        .shortcut-section-header h2 {
+            font-family: var(--font-header);
+            font-size: 1.3rem;
+            font-weight: 400;
+        }
+
+        .shortcut-section-header .tag {
+            font-size: 0.7rem;
+            font-family: var(--font-mono);
+            background: rgba(255,255,255,0.15);
+            padding: 2px 8px;
+            border-radius: 20px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        /* Subsections */
+        .shortcut-groups {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .shortcut-group {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .shortcut-group:nth-child(odd) {
+            border-right: 1px solid var(--border);
+        }
+
+        .shortcut-group:nth-last-child(-n+2):not(:nth-child(odd) ~ *):not(:nth-child(odd)) {
+            border-bottom: none;
+        }
+
+        .shortcut-group:last-child {
+            border-bottom: none;
+        }
+
+        .shortcut-group:nth-last-child(2):nth-child(odd) {
+            border-bottom: none;
+        }
+
+        .shortcut-group h3 {
+            font-family: var(--font-header);
+            font-size: 1rem;
+            color: var(--primary-color);
+            margin-bottom: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        /* Table */
+        .shortcut-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .shortcut-table tr {
+            transition: background 0.12s;
+        }
+
+        .shortcut-table tr:hover {
+            background: var(--surface-alt);
+        }
+
+        .shortcut-table td {
+            padding: 9px 12px;
+            font-size: 0.9rem;
+            vertical-align: middle;
+        }
+
+        .shortcut-table td:first-child {
+            width: 46%;
+        }
+
+        /* Key chips */
+        .keys {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            align-items: center;
+        }
+
+        kbd {
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            background: var(--surface-alt);
+            border: 1px solid var(--border);
+            border-bottom: 3px solid #c8bec8;
+            border-radius: 5px;
+            padding: 2px 8px;
+            color: var(--quaternary-color);
+            white-space: nowrap;
+        }
+
+        .keys .sep {
+            font-size: 0.75rem;
+            color: #999;
+            font-family: var(--font-body);
+        }
+
+        .desc {
+            color: #555;
+        }
+
+        /* Note pill */
+        .note {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-family: var(--font-mono);
+            background: #fff3cd;
+            border: 1px solid #ffe08a;
+            color: #7a5c00;
+            border-radius: 4px;
+            padding: 1px 7px;
+            margin-left: 6px;
+            vertical-align: middle;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--accent-color);
+            padding: 20px;
+            text-align: center;
+            font-size: 0.9em;
+            color: var(--tertiary-color);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            nav ul { flex-wrap: wrap; }
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: row;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            nav ul li { margin: 0 10px; }
+
+            .shortcut-table td:first-child { width: 52%; }
+        }
+
+        @media (max-width: 768px) {
+            .shortcut-groups {
+                grid-template-columns: 1fr;
+            }
+
+            .shortcut-group:nth-child(odd) {
+                border-right: none;
+            }
+
+            .shortcut-group:nth-last-child(2):nth-child(odd) {
+                border-bottom: 1px solid var(--border);
+            }
+        }
+
+        @media (max-width: 480px) {
+            body { font-size: 14px; }
+            header { padding: 20px 14px 16px; }
+            main { margin: 20px auto; padding: 0 14px; }
+            .shortcut-group { padding: 16px 14px; }
+            .shortcut-section-header { padding: 14px 16px; }
+
+            .shortcut-table td { padding: 8px 6px; }
+            .shortcut-table td:first-child { width: 55%; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <ul>
+            <li><a href="../index.html">about me</a></li>
+            <li><a href="../research.html">research</a></li>
+            <li><a href="../contact.html">contact</a></li>
+            <li>
+                <a href="#" class="current">misc</a>
+                <div class="dropdown">
+                    <a href="../misc/shortcuts.html" class="current">shortcuts</a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <header>
+        <h1>Misc</h1>
+        <p class="subheader">Shortcuts</p>
+    </header>
+
+    <main>
+
+        <!-- TMUX SECTION -->
+        <div class="shortcut-section">
+            <div class="shortcut-section-header">
+                <h2>tmux</h2>
+                <span class="tag">terminal multiplexer</span>
+            </div>
+
+            <div class="shortcut-groups">
+            <div class="shortcut-group">
+                <h3>Panes — splitting</h3>
+                <table class="shortcut-table">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="keys">
+                                    <kbd>Ctrl</kbd><span class="sep">+</span><kbd>b</kbd>
+                                    <span class="sep">then</span>
+                                    <kbd>%</kbd>
+                                </div>
+                            </td>
+                            <td class="desc">Split pane vertically (side by side)</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="keys">
+                                    <kbd>Ctrl</kbd><span class="sep">+</span><kbd>b</kbd>
+                                    <span class="sep">then</span>
+                                    <kbd>"</kbd>
+                                </div>
+                            </td>
+                            <td class="desc">Split pane horizontally (top / bottom)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="shortcut-group">
+                <h3>Panes — navigation</h3>
+                <table class="shortcut-table">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="keys">
+                                    <kbd>Ctrl</kbd><span class="sep">+</span><kbd>b</kbd>
+                                    <span class="sep">then</span>
+                                    <kbd>↑</kbd> <kbd>↓</kbd> <kbd>←</kbd> <kbd>→</kbd>
+                                </div>
+                            </td>
+                            <td class="desc">Switch to pane in that direction</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="keys">
+                                    <kbd>Ctrl</kbd><span class="sep">+</span><kbd>b</kbd>
+                                    <span class="sep">then</span>
+                                    <kbd>o</kbd>
+                                </div>
+                            </td>
+                            <td class="desc">Cycle to next pane</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="keys">
+                                    <kbd>Ctrl</kbd><span class="sep">+</span><kbd>b</kbd>
+                                    <span class="sep">then</span>
+                                    <kbd>;</kbd>
+                                </div>
+                            </td>
+                            <td class="desc">Switch to last active pane</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="keys">
+                                    <kbd>Ctrl</kbd><span class="sep">+</span><kbd>b</kbd>
+                                    <span class="sep">then</span>
+                                    <kbd>q</kbd>
+                                </div>
+                            </td>
+                            <td class="desc">Show pane numbers, then type number to jump</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="shortcut-group">
+                <h3>Panes — resizing</h3>
+                <table class="shortcut-table">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="keys">
+                                    <kbd>Ctrl</kbd><span class="sep">+</span><kbd>b</kbd>
+                                    <span class="sep">then</span>
+                                    <kbd>Ctrl</kbd><span class="sep">+</span><kbd>↑</kbd> <kbd>↓</kbd> <kbd>←</kbd> <kbd>→</kbd>
+                                </div>
+                            </td>
+                            <td class="desc">Resize pane 1 cell at a time</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="keys">
+                                    <kbd>Ctrl</kbd><span class="sep">+</span><kbd>b</kbd>
+                                    <span class="sep">then</span>
+                                    <kbd>Alt</kbd><span class="sep">+</span><kbd>↑</kbd> <kbd>↓</kbd> <kbd>←</kbd> <kbd>→</kbd>
+                                </div>
+                            </td>
+                            <td class="desc">Resize pane 5 cells at a time</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="keys">
+                                    <kbd>Ctrl</kbd><span class="sep">+</span><kbd>b</kbd>
+                                    <span class="sep">then</span>
+                                    <kbd>z</kbd>
+                                </div>
+                            </td>
+                            <td class="desc">Toggle pane zoom (full-screen focus)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="shortcut-group">
+                <h3>Panes — closing</h3>
+                <table class="shortcut-table">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="keys">
+                                    <kbd>Ctrl</kbd><span class="sep">+</span><kbd>b</kbd>
+                                    <span class="sep">then</span>
+                                    <kbd>x</kbd>
+                                </div>
+                            </td>
+                            <td class="desc">Kill current pane <span class="note">confirms</span></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="keys">
+                                    <kbd>Ctrl</kbd><span class="sep">+</span><kbd>d</kbd>
+                                </div>
+                            </td>
+                            <td class="desc">Close pane by exiting the shell (no confirm)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            </div><!-- end shortcut-groups -->
+        </div>
+        <!-- end tmux section -->
+
+    </main>
+
+    <footer>
+        <p>&#x2665; 2025</p>
+    </footer>
+
+</body>
+
+</html>
