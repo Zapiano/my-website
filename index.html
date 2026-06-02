@@ -5,55 +5,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pedro Ribeiro de Almeida</title>
+    <script>document.documentElement.setAttribute('lang', localStorage.getItem('preferred-lang') || 'en');</script>
     <link rel="stylesheet" href="./style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Rozha+One&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
+
     <nav>
-        <ul>
-            <li><a href="./index.html" class="current">about me</a></li>
-            <li><a href="./research.html">research</a></li>
-            <li><a href="./contact.html">contact</a></li>
-        </ul>
+        <div class="nav-inner">
+            <a href="./index.html" class="nav-brand">Pedro Ribeiro de Almeida</a>
+            <ul class="nav-links">
+                <li><a href="./index.html" class="current">
+                    <span class="en">about</span><span class="pt">sobre</span>
+                </a></li>
+                <li><a href="./research.html">
+                    <span class="en">research</span><span class="pt">pesquisa</span>
+                </a></li>
+                <li><a href="./contact.html">
+                    <span class="en">contact</span><span class="pt">contato</span>
+                </a></li>
+            </ul>
+            <div class="nav-right">
+                <button class="lang-toggle" id="langToggle">PT</button>
+            </div>
+        </div>
     </nav>
 
-    <header>
-        <h1>Pedro Ribeiro de Almeida</h1>
-    </header>
-
-
-
     <main>
-        <section id="about">
-
-            <h2>about me</h2>
-            <p>I'm Pedro, an environmental scientist with a background in physics and data analysis.
-                I hold a Master's in Physics and have developed innovative models in game theory and ecological
-                research.
-                Currently, I work at the Australian Institute of Marine Science, focusing on decision support and
-                ecological
-                modeling.
-                My passion lies in addressing environmental challenges through interdisciplinary research.
-            </p>
-            <img src="assets/prof1.png" alt="Headshot" class="profile">
+        <section class="hero">
+            <div class="hero-text">
+                <p class="hero-role en">Environmental Scientist &middot; Marine Ecologist</p>
+                <p class="hero-role pt">Cientista Ambiental &middot; Ecologista Marinho</p>
+                <h1 class="hero-name">Pedro Ribeiro<br>de Almeida</h1>
+                <p class="hero-bio en">
+                    Environmental scientist with a background in physics and data analysis.
+                    I hold a Master's in Physics and have developed models in game theory and
+                    ecological research. Currently at the Australian Institute of Marine Science,
+                    working on decision support and ecological modeling.
+                </p>
+                <p class="hero-bio pt">
+                    Cientista ambiental com formação em física e análise de dados.
+                    Tenho Mestrado em Física e desenvolvi modelos em teoria dos jogos e
+                    pesquisa ecológica. Atualmente no Instituto Australiano de Ciência
+                    Marinha, trabalhando com suporte à decisão e modelagem ecológica.
+                </p>
+            </div>
+            <img src="./assets/prof1.png" alt="Pedro Ribeiro de Almeida" class="hero-photo">
         </section>
-        <!--<section id="experience">
-            <h2>Experience</h2>
-            <p>Details about your roles at the Australian Institute of Marine Science and other relevant academic positions.
-            </p>
-            <p>Brief mention of your software development experience and relevant skills.</p>
-        </section>-->
     </main>
 
     <footer>
-        <p> &#x2665; 2025 </p>
+        <p>&#x2665; 2025 &nbsp;&middot;&nbsp; Pedro Ribeiro de Almeida</p>
     </footer>
 
+    <script src="./lang.js"></script>
 </body>
 
 </html>

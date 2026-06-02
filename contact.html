@@ -4,41 +4,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pedro Ribeiro de Almeida</title>
+    <title>Contact — Pedro Ribeiro de Almeida</title>
+    <script>document.documentElement.setAttribute('lang', localStorage.getItem('preferred-lang') || 'en');</script>
     <link rel="stylesheet" href="./style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Rozha+One&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
+
     <nav>
-        <ul>
-            <li><a href="./index.html">about me</a></li>
-            <li><a href="./research.html">research</a></li>
-            <li><a href="./contact.html" class="current">contact</a></li>
-        </ul>
+        <div class="nav-inner">
+            <a href="./index.html" class="nav-brand">Pedro Ribeiro de Almeida</a>
+            <ul class="nav-links">
+                <li><a href="./index.html">
+                    <span class="en">about</span><span class="pt">sobre</span>
+                </a></li>
+                <li><a href="./research.html">
+                    <span class="en">research</span><span class="pt">pesquisa</span>
+                </a></li>
+                <li><a href="./contact.html" class="current">
+                    <span class="en">contact</span><span class="pt">contato</span>
+                </a></li>
+            </ul>
+            <div class="nav-right">
+                <button class="lang-toggle" id="langToggle">PT</button>
+            </div>
+        </div>
     </nav>
 
-    <header>
-        <h1>Pedro Ribeiro de Almeida</h1>
-    </header>
-
     <main>
-        <section id="contact" class="contact">
-            <h2>contact</h2>
-            <p>Don't hesitate to get in touch!</p>
-            <p>Email: <a href="mailto:pedroribalmeida@gmail.com">pedroribalmeida@gmail.com</a></p>
-            <p>LinkedIn: <a href="https://www.linkedin.com/in/perial/"
-                    target="_blank">https://www.linkedin.com/in/perial/</a></p>
+        <section>
+            <p class="section-label en">Get in touch</p>
+            <p class="section-label pt">Entre em contato</p>
+            <p class="contact-intro en">Don't hesitate to reach out — I'm always happy to connect.</p>
+            <p class="contact-intro pt">Não hesite em entrar em contato — estou sempre feliz em conversar.</p>
+            <div class="contact-links">
+                <a href="mailto:pedroribalmeida@gmail.com" class="contact-link">
+                    <span class="contact-link-label">Email</span>
+                    <span class="contact-link-value">pedroribalmeida@gmail.com</span>
+                </a>
+                <a href="https://www.linkedin.com/in/perial/" target="_blank" class="contact-link">
+                    <span class="contact-link-label">LinkedIn</span>
+                    <span class="contact-link-value">linkedin.com/in/perial</span>
+                </a>
+            </div>
         </section>
     </main>
 
     <footer>
-        <p> &#x2665; 2025 </p>
+        <p>&#x2665; 2025 &nbsp;&middot;&nbsp; Pedro Ribeiro de Almeida</p>
     </footer>
+
+    <script src="./lang.js"></script>
 </body>
 
 </html>
